@@ -1,0 +1,11 @@
+--- arch/arm/mach-msm/qdsp5/audio_evrc_in.c
++++ arch/arm/mach-msm/qdsp5/audio_evrc_in.c
+@@ -2,7 +2,7 @@
+  *
+  * evrc audio input device
+  *
+- * Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
++ * Copyright (c) 2011-2013, The Linux Foundation. All rights reserved.
+  *
+  * This code is based in part on arch/arm/mach-msm/qdsp5v2/audio_evrc_in.c,
+  * Copyright (C) 2008 Google, Inc.

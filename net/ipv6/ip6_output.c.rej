@@ -1,0 +1,59 @@
+--- net/ipv6/ip6_output.c
++++ net/ipv6/ip6_output.c
+@@ -1189,31 +1216,44 @@
+ 			unsigned int fraglen;
+ 			unsigned int fraggap;
+ 			unsigned int alloclen;
+-			struct sk_buff *skb_prev;
+ alloc_new_skb:
+-			skb_prev = skb;
+-
+-			
+-			if (skb_prev)
+-				fraggap = skb_prev->len - maxfraglen;
++			/* There's no room in the current skb */
++			if (skb)
++				fraggap = skb->len - maxfraglen;
+ 			else
+ 				fraggap = 0;
++			/* update mtu and maxfraglen if necessary */
++			if (skb == NULL || skb_prev == NULL)
++				ip6_append_data_mtu(&mtu, &maxfraglen,
++						    fragheaderlen, skb, rt);
+ 
++			skb_prev = skb;
++
++			/*
++			 * If remaining data exceeds the mtu,
++			 * we know we need more fragment(s).
++			 */
+ 			datalen = length + fraggap;
+ 			if (datalen > (cork->length <= mtu && !(cork->flags & IPCORK_ALLFRAG) ? mtu : maxfraglen) - fragheaderlen)
+-				datalen = maxfraglen - fragheaderlen;
+-
+-			fraglen = datalen + fragheaderlen;
++				datalen = maxfraglen - fragheaderlen - rt->dst.trailer_len;
+ 			if ((flags & MSG_MORE) &&
+ 			    !(rt->dst.dev->features&NETIF_F_SG))
+-				alloclen = mtu;
++ 				alloclen = mtu;
+ 			else
+ 				alloclen = datalen + fragheaderlen;
+ 
+ 			alloclen += dst_exthdrlen;
+ 
+-			if (datalen == length + fraggap)
+-				alloclen += rt->dst.trailer_len;
++			if (datalen != length + fraggap) {
++				/*
++				 * this is not the last fragment, the trailer
++				 * space is regarded as data space.
++				 */
++				datalen += rt->dst.trailer_len;
++			}
++
++			alloclen += rt->dst.trailer_len;
++			fraglen = datalen + fragheaderlen;
+ 
+ 			alloclen += sizeof(struct frag_hdr);
+ 

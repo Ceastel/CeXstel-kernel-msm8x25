@@ -1,0 +1,19 @@
+--- include/linux/kernel-page-flags.h
++++ include/linux/kernel-page-flags.h
+@@ -28,6 +28,8 @@
+ #define KPF_KSM			21
+ #define KPF_THP			22
+ 
++#ifdef __KERNEL__
++
+ #define KPF_RESERVED		32
+ #define KPF_MLOCKED		33
+ #define KPF_MAPPEDTODISK	34
+@@ -37,4 +39,6 @@
+ #define KPF_ARCH		38
+ #define KPF_UNCACHED		39
+ 
+-#endif 
++#endif /* __KERNEL__ */
++
++#endif /* LINUX_KERNEL_PAGE_FLAGS_H */

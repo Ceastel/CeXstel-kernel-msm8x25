@@ -1,0 +1,11 @@
+--- drivers/net/ethernet/intel/ixgbe/ixgbe_lib.c
++++ drivers/net/ethernet/intel/ixgbe/ixgbe_lib.c
+@@ -628,7 +628,7 @@
+ 			f = &adapter->ring_feature[RING_F_FCOE];
+ 			if ((rxr_idx >= f->mask) &&
+ 			    (rxr_idx < f->mask + f->indices))
+-				set_bit(__IXGBE_RX_FCOE, &ring->state);
++				set_bit(__IXGBE_RX_FCOE_BUFSZ, &ring->state);
+ 		}
+ 
+ #endif /* IXGBE_FCOE */

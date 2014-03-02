@@ -1,0 +1,11 @@
+--- drivers/net/ethernet/intel/e1000e/mac.c
++++ drivers/net/ethernet/intel/e1000e/mac.c
+@@ -709,7 +709,7 @@
+ 	 * In the case of the phy reset being blocked, we already have a link.
+ 	 * We do not need to set it up again.
+ 	 */
+-	if (hw->phy.ops.check_reset_block && hw->phy.ops.check_reset_block(hw))
++	if (hw->phy.ops.check_reset_block(hw))
+ 		return 0;
+ 
+ 	/*

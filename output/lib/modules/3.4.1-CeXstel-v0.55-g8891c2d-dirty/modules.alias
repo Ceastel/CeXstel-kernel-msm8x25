@@ -1,0 +1,4 @@
+# Aliases extracted from modules themselves.
+alias stdrng ansi_cprng
+alias net-pf-24 pppoe
+alias input:b*v*p*e*-e*k*r*a*m*l*s*f*w* evbug

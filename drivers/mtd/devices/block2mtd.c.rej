@@ -1,0 +1,10 @@
+--- drivers/mtd/devices/block2mtd.c
++++ drivers/mtd/devices/block2mtd.c
+@@ -271,7 +271,6 @@
+ 	dev->mtd.flags = MTD_CAP_RAM;
+ 	dev->mtd._erase = block2mtd_erase;
+ 	dev->mtd._write = block2mtd_write;
+-	dev->mtd._writev = mtd_writev;
+ 	dev->mtd._sync = block2mtd_sync;
+ 	dev->mtd._read = block2mtd_read;
+ 	dev->mtd.priv = dev;

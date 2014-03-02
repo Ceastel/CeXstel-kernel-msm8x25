@@ -1,0 +1,13 @@
+--- arch/arm/kernel/traps.c
++++ arch/arm/kernel/traps.c
+@@ -496,7 +496,9 @@
+ 		if (end > vma->vm_end)
+ 			end = vma->vm_end;
+ 
+-		flush_cache_user_range(vma, start, end);
++		up_read(&mm->mmap_sem);
++		flush_cache_user_range(start, end);
++		return;
+ 	}
+ 	up_read(&mm->mmap_sem);
+ }

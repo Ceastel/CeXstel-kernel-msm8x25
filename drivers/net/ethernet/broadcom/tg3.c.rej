@@ -1,0 +1,12 @@
+--- drivers/net/ethernet/broadcom/tg3.c
++++ drivers/net/ethernet/broadcom/tg3.c
+@@ -14248,8 +14248,7 @@
+ 		}
+ 	}
+ 
+-	if (tg3_flag(tp, 5755_PLUS) ||
+-	    GET_ASIC_REV(tp->pci_chip_rev_id) == ASIC_REV_5906)
++	if (tg3_flag(tp, 5755_PLUS))
+ 		tg3_flag_set(tp, SHORT_DMA_BUG);
+ 
+ 	if (GET_ASIC_REV(tp->pci_chip_rev_id) == ASIC_REV_5719)

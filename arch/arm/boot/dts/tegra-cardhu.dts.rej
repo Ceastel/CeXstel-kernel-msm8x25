@@ -1,0 +1,11 @@
+--- arch/arm/boot/dts/tegra-cardhu.dts
++++ arch/arm/boot/dts/tegra-cardhu.dts
+@@ -64,7 +64,7 @@
+ 		status = "disable";
+ 	};
+ 
+-	sdhci@78000400 {
++	sdhci@78000600 {
+ 		support-8bit;
+ 	};
+ };
