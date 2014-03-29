@@ -116,6 +116,17 @@ config CGROUP_BFQIO
       filesystem interface.  The name of the subsystem will be
       bfqio.
 
+config IOSCHED_SIOPLUS
+       tristate "Simple I/O scheduler plus"
+       default y
+       ---help---
+         The Simple I/O scheduler is an extremely simple scheduler,
+         based on noop and deadline, that relies on deadlines to
+         ensure fairness. The algorithm does not do any sorting but
+         basic merging, trying to keep a minimum overhead. It is aimed
+         mainly for aleatory access devices (eg: flash devices).
+
+
 config IOSCHED_SIO
     tristate "Simple I/O scheduler"
     default y
@@ -135,16 +146,6 @@ choice
 
 	config DEFAULT_DEADLINE
 		bool "Deadline" if IOSCHED_DEADLINE=y
-
-config IOSCHED_SIOPLUS
-       tristate "Simple I/O scheduler plus"
-       default y
-       ---help---
-         The Simple I/O scheduler is an extremely simple scheduler,
-         based on noop and deadline, that relies on deadlines to
-         ensure fairness. The algorithm does not do any sorting but
-         basic merging, trying to keep a minimum overhead. It is aimed
-         mainly for aleatory access devices (eg: flash devices).
 
 
 
